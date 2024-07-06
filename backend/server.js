@@ -1,21 +1,17 @@
 require("dotenv").config();
 const express = require("express");
-const mongoose = require("mongoose");
 const cors = require("cors");
-mongoose.connect(process.env.DATABASE_URL);
+const connectDB = require("./db");
 
 const app = express();
-const db = mongoose.connection;
+
+// Connect to MongoDB
+connectDB();
+
 app.use(cors());
 app.use(express.json());
-db.on("error",(err)=>console.log(err));
-db.on("open",()=>console.log("DATABASE CONNECTED"));
 
-const tasRouter = require("./routes/tasks");
-app.use("/api/tasks",tasRouter)
+const taskRouter = require("./routes/tasks");
+app.use("/api/tasks", taskRouter);
 
-
-
-
-
-app.listen(process.env.PORT,()=>console.log(`server is listening at port ${process.env.PORT}`));
+app.listen(process.env.PORT, () => console.log(`Server is listening at port ${process.env.PORT}`));
