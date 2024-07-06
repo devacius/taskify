@@ -16,7 +16,7 @@ const TaskItem = ({ task, onDelete }) => {
 
   const handleDelete = async () => {
     try {
-      const { data } = await axios.delete(`http://localhost:3002/api/tasks/${task._id}`);
+      const { data } = await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/tasks/${task._id}`);
       if (data.success) {
         
         alert('Task deleted successfully');

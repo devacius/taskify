@@ -20,7 +20,7 @@ const AddTaskPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3002/api/tasks/add', task);
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/tasks/add`, task);
       if (response.data.success) {
         alert('Task created successfully');
         navigate('/');
